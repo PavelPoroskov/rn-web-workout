@@ -1,0 +1,6 @@
+yarn create react-app rn-web-workout-cra --template typescript
+cd rn-web-workout-cra
+yarn add react-native react-native-web
+yarn add -D @types/react-native-web
+yarn start
+
