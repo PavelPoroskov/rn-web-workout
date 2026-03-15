@@ -1,0 +1,1 @@
+npm create vite@latest rn-web-workout-vite -- --template react-ts
