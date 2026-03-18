@@ -1,1 +1,11 @@
 npm create vite@latest rn-web-workout-vite -- --template react-ts
+npm i react-native react-native-web
+npm i -D vite-plugin-rnw
+npm i -D @types/react-native-web
+
+// error on http://localhost:5173/: no content
+// downgrade vite@8 -> vite@7 for react-native-web
+npm rm @vitejs/plugin-react
+npm rm vite
+npm i -D vite@7
+// TODO vite@7 -> vite@8 WHEN react-native-web IS READY
