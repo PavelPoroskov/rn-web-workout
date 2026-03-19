@@ -1,0 +1,20 @@
+{
+  "name": "@tutorial-workout/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc --build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-native": "^0.84.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

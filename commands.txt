@@ -38,3 +38,26 @@ mkdir packages
 
 git mv rn-web-workout-vite packages/web
 git mv WorkoutReactNativeApp packages/app
+rm -rf packages/*/node_modules
+cp packages/web/.gitignore ./
+//? npm install // in root
+
+npm init -y -w packages/common
+mkdir packages/common/src
+cp packages/app/src/App.tsx packages/common/src/index.tsx
+cp packages/web/tsconfig.app.json packages/common/tsconfig.json
+cd packages/common
+npm i react react-native
+npm i -D typescript
+
+// in root
+npm run build --workspace=@tutorial-workout/common
+npm i @tutorial-workout/common -w @tutorial-workout/web
+npm i @tutorial-workout/common -w @tutorial-workout/app
+
+cd packages/common
+npm run build
+
+cd packages/web
+npm run dev
+// result: see app from common

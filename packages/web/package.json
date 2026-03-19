@@ -1,5 +1,5 @@
 {
-  "name": "rn-web-workout-vite",
+  "name": "@tutorial-workout/web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tutorial-workout/common": "^1.0.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-native": "^0.84.1",
