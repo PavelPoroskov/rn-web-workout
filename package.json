@@ -1,5 +1,6 @@
 {
   "name": "rn-web-workout",
+  "private": "true",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,6 +15,9 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "workspaces":[
+    "packages/*"
+  ],
   "bugs": {
     "url": "https://github.com/PavelPoroskov/rn-web-workout/issues"
   },
