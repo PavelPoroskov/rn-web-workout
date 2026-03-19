@@ -12,7 +12,7 @@ npm i -D vite@7
 // TODO vite@7 -> vite@8 WHEN react-native-web IS READY
 
 
-npx @react-native-community/cli@latest init WorkoutReactNativeApp --version latest
+npx @react-native-community/cli@latest init WorkoutReactNativeApp --version latest --skip-git-init
 cd WorkoutReactNativeApp
 npm i react@19.2.4
 
@@ -61,3 +61,27 @@ npm run build
 cd packages/web
 npm run dev
 // result: see app from common
+
+cd packages/app
+npm run start // terminal 1
+npm run android // terminal 2
+// error 'react-native-renderer(19.2.3) must be the same version as react(19.2.4)
+
+cd packages/web
+npm rm react-native
+npm rm react
+npm rm react-dom
+
+cd packages/common
+npm rm react
+
+cd packages/app
+npm rm react
+
+cd .. // root
+npm i react@19.2.3
+npm i react-dom@19.2.3
+
+cd packages/app
+npm run start // terminal 1
+npm run android // terminal 2
