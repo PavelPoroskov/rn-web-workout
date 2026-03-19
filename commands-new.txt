@@ -9,3 +9,7 @@ npm rm @vitejs/plugin-react
 npm rm vite
 npm i -D vite@7
 // TODO vite@7 -> vite@8 WHEN react-native-web IS READY
+
+
+npx @react-native-community/cli@latest init WorkoutReactNativeApp --version latest
+
