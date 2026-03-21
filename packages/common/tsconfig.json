@@ -10,10 +10,10 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    // "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    // "noEmit": true,
+    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -24,9 +24,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "declaration": true,
+    // "declaration": true,
     //"module": "commonjs",
-    "outDir": "dist"
+    // "outDir": "dist"
   },
   "include": ["src"]
 }
