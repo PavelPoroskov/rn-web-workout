@@ -12,8 +12,5 @@
   "type": "commonjs",
   "dependencies": {
     "react-native": "^0.84.1"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3"
   }
 }

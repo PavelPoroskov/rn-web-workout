@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "workspaces":[
+  "workspaces": [
     "packages/*"
   ],
   "bugs": {
@@ -25,5 +25,8 @@
   "dependencies": {
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }
