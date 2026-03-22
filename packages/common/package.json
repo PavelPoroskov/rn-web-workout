@@ -11,6 +11,8 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "mobx": "^6.15.0",
+    "mobx-react-lite": "^4.1.1",
     "react-native": "^0.84.1"
   }
 }

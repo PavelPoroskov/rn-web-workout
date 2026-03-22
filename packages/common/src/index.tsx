@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native'
+import React, { useContext } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { observer } from 'mobx-react-lite'
+import { CounterStoreContext } from './stores/CounterStore';
 
-export const App: React.FC = () => {
-  const [count, setCount] = useState(0)
+export const App: React.FC = observer(() => {
+  const counterStore = useContext(CounterStoreContext)
 
   return (
     <View style={styles.container}>
       <Text>Hello from React Native from common</Text>
-      <Text>{count}</Text>
-      <Button title='Increment' onPress={() => setCount(count + 1)}/>
+      <Text>{counterStore.count}</Text>
+      <Button title='Increment' onPress={counterStore.incrementCount}/>
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   container: {
