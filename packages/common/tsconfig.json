@@ -27,6 +27,7 @@
     // "declaration": true,
     //"module": "commonjs",
     // "outDir": "dist"
+    "strictPropertyInitialization": false,
   },
   "include": ["src"]
 }
