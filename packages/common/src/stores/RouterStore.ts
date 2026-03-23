@@ -6,7 +6,7 @@ type Routes = 'WorkoutHistory' | 'CurrentWorkout'
 
 class RouterStore {
     @observable
-    accessor screen: Routes = 'WorkoutHistory'
+    accessor screen: Routes = 'CurrentWorkout'
 
     @action.bound
     setScreen(inScreen: Routes) {
