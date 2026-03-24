@@ -12,7 +12,7 @@ export class RouterStore {
   }
 
   @observable
-  accessor screen: Routes = 'CurrentWorkout'
+  accessor screen: Routes = 'WorkoutHistory'
 
   @action.bound
   setScreen(inScreen: Routes) {

@@ -1,16 +1,19 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 3,
     backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowOpacity: 0.3,
+    // shadowRadius: 3,
+    boxShadow: '2px 2px 3px rgb(0 0 0 / 30%)',
     flexDirection: "column",
-    padding: 10
+    padding: 10,
+    marginBottom: 10,
   },
   topRow: {
     flexDirection: "row",
@@ -47,11 +50,12 @@ const styles = StyleSheet.create({
 
 interface WorkoutCardProps {
   exercise: string
-  repsAndWeight: string;
+  repsAndWeight: string
   sets: string[]
+  onSetPress: (index: number) => void
 }
 
-export const WorkoutCard: React.FC<WorkoutCardProps> = ({ exercise, repsAndWeight, sets }) => {
+export const WorkoutCard: React.FC<WorkoutCardProps> = observer(({ exercise, repsAndWeight, sets, onSetPress }) => {
 
   return (
     <View style={styles.cardContainer}>
@@ -73,20 +77,20 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ exercise, repsAndWeigh
 
           if (set === '') {
             return (
-              <View key={key} style={[styles.circle, styles.fadedBackground]}>
+              <TouchableOpacity onPress={() => onSetPress(index)} key={key} style={[styles.circle, styles.fadedBackground]}>
                 <Text style={[styles.circleText, styles.grayText]}></Text>
-              </View>
+              </TouchableOpacity>
             )
           }
 
           return (
-            <View key={key} style={styles.circle}>
+            <TouchableOpacity onPress={() => onSetPress(index)} key={key} style={styles.circle}>
               <Text style={[styles.circleText, styles.whiteText]}>{set}</Text>
-            </View>
+            </TouchableOpacity>
           )
         })}
 
       </View>
     </View>
   )
-}
+})

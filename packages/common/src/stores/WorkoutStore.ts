@@ -1,9 +1,18 @@
+import { action, observable } from "mobx"
 import type { RootStore } from "./RootStore"
 
 type WorkoutDay = 'a' | 'b'
 
 interface WorkoutHistory {
   [key: string]: Array<{ exercise: string, value: number }>
+}
+
+interface CurrentExercise {
+  weight: number
+  reps: number
+  numSets: number
+  exercise: string
+  sets: string[]
 }
 
 export class WorkoutStore {
@@ -13,13 +22,21 @@ export class WorkoutStore {
     this.rootStore = rootStore
   }
 
-  currentSquat: number
-  currentBenchPress: number
-  currentOverheadPress: number
-  currentDeadLift: number
-  currentBarbellRow: number
+  @observable accessor currentSquat: number
+  @observable accessor currentBenchPress: number
+  @observable accessor currentOverheadPress: number
+  @observable accessor currentDeadLift: number
+  @observable accessor currentBarbellRow: number
 
-  lastWorkoutType: WorkoutDay
+  @observable accessor lastWorkoutType: WorkoutDay
 
-  history: WorkoutHistory
+  @observable accessor currentExercise: CurrentExercise[] = []
+
+  @observable accessor history: WorkoutHistory
+
+
+  @action.bound
+  setReps(exerciseIndex: number, setIndex: number, reps: string) {
+      this.currentExercise[exerciseIndex].sets[setIndex] = reps
+  }
 }

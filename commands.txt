@@ -94,3 +94,15 @@ npm i -D @babel/plugin-transform-class-static-block
 
 cd packages/web
 npm i -D @babel/plugin-proposal-decorators
+
+
+//vs code
+Ctrl Shift I   format code
+Alt Shift .    add import
+Alt Shift O    organize import
+Ctrl Shift K   rm line
+
+//issue firefox: number in circle is not centered vertically
+//  chrome ok
+
+//issue: i see blink when click on circle in web version
