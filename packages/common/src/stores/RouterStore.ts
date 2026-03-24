@@ -1,17 +1,21 @@
 // import { makeObservable, observable, action } from "mobx";
 import { action, observable } from "mobx";
-import { createContext } from "react";
+import type { RootStore } from "./RootStore";
 
 type Routes = 'WorkoutHistory' | 'CurrentWorkout'
 
-class RouterStore {
-    @observable
-    accessor screen: Routes = 'CurrentWorkout'
+export class RouterStore {
+  rootStore: RootStore
 
-    @action.bound
-    setScreen(inScreen: Routes) {
-        this.screen = inScreen
-    }    
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore
+  }
+
+  @observable
+  accessor screen: Routes = 'CurrentWorkout'
+
+  @action.bound
+  setScreen(inScreen: Routes) {
+    this.screen = inScreen
+  }
 }
-
-export const RouterStoreContext = createContext<RouterStore>(new RouterStore())

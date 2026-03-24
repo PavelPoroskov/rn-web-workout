@@ -1,21 +1,25 @@
-import { createContext } from "react";
+import type { RootStore } from "./RootStore"
 
 type WorkoutDay = 'a' | 'b'
 
 interface WorkoutHistory {
-    [key: string]: Array<{exercise: string, value: number}>
+  [key: string]: Array<{ exercise: string, value: number }>
 }
 
-class WorkoutStore {
-    currentSquat: number
-    currentBenchPress: number
-    currentOverheadPress: number
-    currentDeadLift: number
-    currentBarbellRow: number
+export class WorkoutStore {
+  rootStore: RootStore
 
-    lastWorkoutType: WorkoutDay
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore
+  }
 
-    history: WorkoutHistory
+  currentSquat: number
+  currentBenchPress: number
+  currentOverheadPress: number
+  currentDeadLift: number
+  currentBarbellRow: number
+
+  lastWorkoutType: WorkoutDay
+
+  history: WorkoutHistory
 }
-
-export const WorkoutStoreContext = createContext<WorkoutStore>(new WorkoutStore())
