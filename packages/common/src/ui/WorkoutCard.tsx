@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text } from '../ui/CustomRN';
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -40,8 +41,6 @@ const styles = StyleSheet.create({
   circleText: {
     fontSize: 16,
     // margin: "auto",
-    // fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Helvetica, Arial, sans-serif'
   },
   whiteText: {
     color: "#fff"

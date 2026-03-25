@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, type DimensionValue } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, type DimensionValue } from 'react-native';
+import { Text } from '../ui/CustomRN';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +50,7 @@ export const WorkoutTimer: React.FC<WorkoutTimerProps> = observer(({ currentTime
         <TouchableOpacity
           onPress={onXPress}
         >
-          <Text style={styles.x}>X</Text>
+          <Text style={styles.x}>x</Text>
         </TouchableOpacity>
       </View>
     </View>
