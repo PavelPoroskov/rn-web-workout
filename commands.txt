@@ -102,7 +102,11 @@ Alt Shift .    add import
 Alt Shift O    organize import
 Ctrl Shift K   rm line
 
-//issue firefox: number in circle is not centered vertically
-//  chrome ok
+//issue firefox (linux-fedora): number in circle is not centered vertically,
+// chrome ok, font "Liberation Sans"
+// firefox, font "Nimbus Sans"
+// solution: changed font to fontFamily: "Liberation Sans" as in Chrome
 
 //issue: i see blink when click on circle in web version
+// when press and hold other color
+// ?hypothesis: from using react context

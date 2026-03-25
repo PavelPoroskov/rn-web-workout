@@ -31,11 +31,17 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: '50%',
-    backgroundColor: "#8FB299"
+    // borderRadius: '25px',
+    backgroundColor: "#8FB299",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   circleText: {
     fontSize: 16,
-    margin: "auto"
+    // margin: "auto",
+    // fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Helvetica, Arial, sans-serif'
   },
   whiteText: {
     color: "#fff"
@@ -65,11 +71,15 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = observer(({ exercise, rep
       </View>
       <View style={styles.bottomRow}>
         {sets.map((set, index) => {
-          const key = `${set}${index}`
+          // const key = `${set}${index}`
+          const key = index
 
           if (set === 'x') {
             return (
-              <View key={key} style={[styles.circle, styles.fadedBackground]}>
+              <View
+                key={key}
+                style={[styles.circle, styles.fadedBackground]}
+              >
                 <Text style={[styles.circleText, styles.grayText]}>X</Text>
               </View>
             )
@@ -77,14 +87,22 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = observer(({ exercise, rep
 
           if (set === '') {
             return (
-              <TouchableOpacity onPress={() => onSetPress(index)} key={key} style={[styles.circle, styles.fadedBackground]}>
+              <TouchableOpacity
+                key={key}
+                style={[styles.circle, styles.fadedBackground]}
+                onPress={() => onSetPress(index)}
+              >
                 <Text style={[styles.circleText, styles.grayText]}></Text>
               </TouchableOpacity>
             )
           }
 
           return (
-            <TouchableOpacity onPress={() => onSetPress(index)} key={key} style={styles.circle}>
+            <TouchableOpacity
+              key={key}
+              style={styles.circle}
+              onPress={() => onSetPress(index)}
+            >
               <Text style={[styles.circleText, styles.whiteText]}>{set}</Text>
             </TouchableOpacity>
           )
