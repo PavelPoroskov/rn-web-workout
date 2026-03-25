@@ -106,7 +106,8 @@ Ctrl Shift K   rm line
 // chrome ok, font "Liberation Sans"
 // firefox, font "Nimbus Sans"
 // solution: changed font to fontFamily: "Liberation Sans" as in Chrome
+issue button text is not vertically centered too
 
 //issue: i see blink when click on circle in web version
-// when press and hold other color
+// when press and hold other color: it is standard behavior
 // ?hypothesis: from using react context
