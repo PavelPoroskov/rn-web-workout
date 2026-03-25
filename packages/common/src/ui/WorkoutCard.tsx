@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: '50%',
-    // borderRadius: '25px',
+    // borderRadius: 25,
     backgroundColor: "#8FB299",
     display: "flex",
     justifyContent: "center",

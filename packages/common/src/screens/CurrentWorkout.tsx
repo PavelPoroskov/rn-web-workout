@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { RootStoreContext } from '../stores/RootStore';
 import { WorkoutCard } from '../ui/WorkoutCard';
 import { observer } from 'mobx-react-lite';
+import { WorkoutTimer } from '../ui/WorkoutTimer';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,6 +15,11 @@ const styles = StyleSheet.create({
 
 export const CurrentWorkoutScreen: React.FC = observer(() => {
   const rootStore = useContext(RootStoreContext)
+  useEffect(() => {
+    return () => {
+      rootStore.workoutTimer.stopTimer()
+    }
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -27,6 +33,8 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
             repsAndWeight={`${e.numSets}x${e.reps} ${e.weight}`}
             sets={e.sets}
             onSetPress={(setIndex) => {
+              rootStore.workoutTimer.startTimer()
+
               const currentValue = e.sets[setIndex]
 
               let newValue: string
@@ -34,6 +42,7 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
               if (currentValue === '') {
                 newValue = `${e.reps}`
               } else if (currentValue === '0') {
+                rootStore.workoutTimer.stopTimer()
                 newValue = ''
               } else {
                 newValue = `${parseInt(currentValue) - 1}`
@@ -45,6 +54,11 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
           />
         )
       })}
+      {(rootStore.workoutTimer.isRunning || null) && <WorkoutTimer
+        currentTime={rootStore.workoutTimer.display}
+        percent={rootStore.workoutTimer.percent}
+        onXPress={rootStore.workoutTimer.stopTimer}
+      />}
     </View>
   )
 })
