@@ -9,8 +9,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa",
-    padding: 10,
   },
+  wrapper: {
+    padding: 10,
+  }
 });
 
 export const CurrentWorkoutScreen: React.FC = observer(() => {
@@ -23,37 +25,39 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
 
   return (
     <View style={styles.container}>
-      {/* <Text>Current Workout Screen</Text> */}
-      {/* <WorkoutCard exercise='Squat' repsAndWeight='5x5 260' sets={["5", "5", "5", "", "x"]}/> */}
-      {rootStore.workoutStore.currentExercise.map((e, exerciseIndex) => {
-        return (
-          <WorkoutCard
-            key={e.exercise}
-            exercise={e.exercise}
-            repsAndWeight={`${e.numSets}x${e.reps} ${e.weight}`}
-            sets={e.sets}
-            onSetPress={(setIndex) => {
-              rootStore.workoutTimer.startTimer()
+      <View style={styles.wrapper}>
+        {/* <Text>Current Workout Screen</Text> */}
+        {/* <WorkoutCard exercise='Squat' repsAndWeight='5x5 260' sets={["5", "5", "5", "", "x"]}/> */}
+        {rootStore.workoutStore.currentExercise.map((e, exerciseIndex) => {
+          return (
+            <WorkoutCard
+              key={e.exercise}
+              exercise={e.exercise}
+              repsAndWeight={`${e.numSets}x${e.reps} ${e.weight}`}
+              sets={e.sets}
+              onSetPress={(setIndex) => {
+                rootStore.workoutTimer.startTimer()
 
-              const currentValue = e.sets[setIndex]
+                const currentValue = e.sets[setIndex]
 
-              let newValue: string
+                let newValue: string
 
-              if (currentValue === '') {
-                newValue = `${e.reps}`
-              } else if (currentValue === '0') {
-                rootStore.workoutTimer.stopTimer()
-                newValue = ''
-              } else {
-                newValue = `${parseInt(currentValue) - 1}`
-              }
+                if (currentValue === '') {
+                  newValue = `${e.reps}`
+                } else if (currentValue === '0') {
+                  rootStore.workoutTimer.stopTimer()
+                  newValue = ''
+                } else {
+                  newValue = `${parseInt(currentValue) - 1}`
+                }
 
-              // e.sets[setIndex] = newValue
-              rootStore.workoutStore.setReps(exerciseIndex, setIndex, newValue)
-            }}
-          />
-        )
-      })}
+                // e.sets[setIndex] = newValue
+                rootStore.workoutStore.setReps(exerciseIndex, setIndex, newValue)
+              }}
+            />
+          )
+        })}
+      </View>
       {(rootStore.workoutTimer.isRunning || null) && <WorkoutTimer
         currentTime={rootStore.workoutTimer.display}
         percent={rootStore.workoutTimer.percent}

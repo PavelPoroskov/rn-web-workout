@@ -114,5 +114,3 @@ issue button text is not vertically centered too
 
 
  npm i react-router-dom@6 react-router-native@6
-
- // issue app in android emulator: WorkoutTimer is not in full width
