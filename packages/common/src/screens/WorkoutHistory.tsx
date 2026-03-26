@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Button, Text, View } from 'react-native';
+import { useNavigate } from '../Router';
 import { RootStoreContext } from '../stores/RootStore';
 
 export const WorkoutHistoryScreen: React.FC = () => {
   const rootStore = useContext(RootStoreContext)
+  const navigate = useNavigate();
 
   return (
     <View>
@@ -32,7 +34,9 @@ export const WorkoutHistoryScreen: React.FC = () => {
             weight: 360,
           },
         )
-        rootStore.routerStore.setScreen('CurrentWorkout')
+
+        // rootStore.routerStore.setScreen('CurrentWorkout')
+        navigate('/current-workout')
       }} />
     </View>
   )

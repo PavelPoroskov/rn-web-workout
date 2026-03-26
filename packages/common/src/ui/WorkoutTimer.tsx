@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: 'center',
     flex: 1,
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
   },
   timeText: {
     fontSize: 18,

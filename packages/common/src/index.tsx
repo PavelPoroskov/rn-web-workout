@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Router } from './Router';
+import { AppRoutes } from './Routes';
 
 export const App: React.FC = () => {
 
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Router />
+        <AppRoutes />
       </View>
     </View>
   )

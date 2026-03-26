@@ -1,15 +1,15 @@
 // import { makeObservable, observable, action } from "mobx";
 import { action, observable } from "mobx";
-import type { RootStore } from "./RootStore";
+// import type { RootStore } from "./RootStore";
 
 type Routes = 'WorkoutHistory' | 'CurrentWorkout'
 
 export class RouterStore {
-  rootStore: RootStore
+  // rootStore: RootStore
 
-  constructor(rootStore: RootStore) {
-    this.rootStore = rootStore
-  }
+  // constructor(rootStore: RootStore) {
+  //   this.rootStore = rootStore
+  // }
 
   @observable
   accessor screen: Routes = 'WorkoutHistory'
@@ -19,3 +19,6 @@ export class RouterStore {
     this.screen = inScreen
   }
 }
+
+// it was used before react-router
+// results: router has state

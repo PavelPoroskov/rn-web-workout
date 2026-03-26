@@ -111,3 +111,8 @@ issue button text is not vertically centered too
 //issue: i see blink when click on circle in web version
 // when press and hold other color: it is standard behavior
 // ?hypothesis: from using react context
+
+
+ npm i react-router-dom@6 react-router-native@6
+
+ // issue app in android emulator: WorkoutTimer is not in full width
