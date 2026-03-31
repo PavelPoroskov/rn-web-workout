@@ -11,7 +11,7 @@ export const WorkoutHistoryScreen: React.FC = () => {
     <View>
       <Text>Workout History Screen</Text>
       <Button title='Create Workout' onPress={() => {
-        rootStore.workoutStore.currentExercise.push(
+        rootStore.workoutStore.addExercises([
           {
             exercise: 'Squad',
             numSets: 5,
@@ -33,7 +33,7 @@ export const WorkoutHistoryScreen: React.FC = () => {
             sets: ['5', 'x', 'x', 'x', 'x'],
             weight: 360,
           },
-        )
+        ])
 
         // rootStore.routerStore.setScreen('CurrentWorkout')
         navigate('/current-workout')

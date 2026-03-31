@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
 import { action, computed, observable } from "mobx";
 import {
+  // clearPersistedStore,
   makePersistable,
-  clearPersistedStore,
+  // pausePersisting,
+  // startPersisting,
 } from 'mobx-persist-store';
 
 export class WorkoutTimerStore {
@@ -69,9 +71,13 @@ export class WorkoutTimerStore {
       ]
     }).then(
       action(() => {
+        // pausePersisting(this)
+        // clearPersistedStore(this).then(() => {
+        //   startPersisting(this)
+        // })
+
         if (this.isRunning) {
           this.measure()
-          clearPersistedStore(this)
         }
       })
     )

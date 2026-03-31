@@ -1,9 +1,11 @@
-import { action, observable } from "mobx"
-import type { RootStore } from "./RootStore"
+import { action, observable } from "mobx";
 import {
+  // clearPersistedStore,
   makePersistable,
-  clearPersistedStore,
+  // startPersisting,
+  // pausePersisting,
 } from 'mobx-persist-store';
+import type { RootStore } from "./RootStore";
 
 type WorkoutDay = 'a' | 'b'
 
@@ -38,7 +40,12 @@ export class WorkoutStore {
         'history',
       ]
     }).then(() => {
-      clearPersistedStore(this)
+      // action(() => {
+      //   pausePersisting(this)
+      //   clearPersistedStore(this).then(() => {
+      //     startPersisting(this)
+      //   })
+      // })
     });
   }
 
@@ -57,6 +64,15 @@ export class WorkoutStore {
 
   @action.bound
   setReps(exerciseIndex: number, setIndex: number, reps: string) {
-      this.currentExercise[exerciseIndex].sets[setIndex] = reps
+    this.currentExercise[exerciseIndex].sets[setIndex] = reps
+  }
+
+  @action.bound
+  addExercises(exerciseList: CurrentExercise[]) {
+    while (this.currentExercise.length > 0) {
+      this.currentExercise.pop()
+    }
+    this.currentExercise.push(...exerciseList)
   }
 }
+

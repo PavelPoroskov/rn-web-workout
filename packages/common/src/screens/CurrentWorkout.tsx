@@ -31,7 +31,7 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
         {rootStore.workoutStore.currentExercise.map((e, exerciseIndex) => {
           return (
             <WorkoutCard
-              key={e.exercise}
+              key={exerciseIndex}
               exercise={e.exercise}
               repsAndWeight={`${e.numSets}x${e.reps} ${e.weight}`}
               sets={e.sets}
