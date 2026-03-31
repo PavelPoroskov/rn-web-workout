@@ -1,5 +1,9 @@
 import dayjs from "dayjs";
 import { action, computed, observable } from "mobx";
+import {
+  makePersistable,
+  clearPersistedStore,
+} from 'mobx-persist-store';
 
 export class WorkoutTimerStore {
   @observable accessor startTime = dayjs()
@@ -52,7 +56,25 @@ export class WorkoutTimerStore {
 
   @computed
   get percent() {
-    return `${Math.min(100, (this.seconds / 180)*100)}%`
+    return `${Math.min(100, (this.seconds / 180) * 100)}%`
+  }
+
+  constructor() {
+    makePersistable(this, {
+      name: 'WorkoutTimerStore',
+      properties: [
+        'startTime',
+        'isRunning',
+        'seconds',
+      ]
+    }).then(
+      action(() => {
+        if (this.isRunning) {
+          this.measure()
+          clearPersistedStore(this)
+        }
+      })
+    )
   }
 }
 

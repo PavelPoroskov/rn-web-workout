@@ -1,5 +1,9 @@
 import { action, observable } from "mobx"
 import type { RootStore } from "./RootStore"
+import {
+  makePersistable,
+  clearPersistedStore,
+} from 'mobx-persist-store';
 
 type WorkoutDay = 'a' | 'b'
 
@@ -20,6 +24,22 @@ export class WorkoutStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore
+
+    makePersistable(this, {
+      name: 'WorkoutStore',
+      properties: [
+        'currentSquat',
+        'currentBenchPress',
+        'currentOverheadPress',
+        'currentDeadLift',
+        'currentBarbellRow',
+        'lastWorkoutType',
+        'currentExercise',
+        'history',
+      ]
+    }).then(() => {
+      clearPersistedStore(this)
+    });
   }
 
   @observable accessor currentSquat: number

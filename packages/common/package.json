@@ -11,8 +11,10 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^3.0.2",
     "dayjs": "^1.11.20",
     "mobx": "^6.15.0",
+    "mobx-persist-store": "^1.1.8",
     "mobx-react-lite": "^4.1.1",
     "react-native": "^0.84.1",
     "react-router-dom": "^6.30.3",
