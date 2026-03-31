@@ -41,14 +41,14 @@ export const Text: React.FC<ReactNative.TextProps> = ({ children, ...props }) =>
 };
 
 // Button doesn't have property style
-export const Button: React.FC<ReactNative.ButtonProps> = (props) => {
-    const { title, ...restProps } = props
+// export const Button: React.FC<ReactNative.ButtonProps> = (props) => {
+//     const { title, ...restProps } = props
 
-    return (
-      <ReactNative.View>
-        <ReactNative.TouchableOpacity {...restProps}>
-          <Text>{title}</Text>
-        </ReactNative.TouchableOpacity>
-      </ReactNative.View>
-    )
-};
+//     return (
+//       <ReactNative.View>
+//         <ReactNative.TouchableOpacity {...restProps}>
+//           <Text>{title}</Text>
+//         </ReactNative.TouchableOpacity>
+//       </ReactNative.View>
+//     )
+// };

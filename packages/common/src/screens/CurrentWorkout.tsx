@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { RootStoreContext } from '../stores/RootStore';
 import { WorkoutCard } from '../ui/WorkoutCard';
 import { observer } from 'mobx-react-lite';
 import { WorkoutTimer } from '../ui/WorkoutTimer';
+import { useNavigate } from '../Router';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
 });
 
 export const CurrentWorkoutScreen: React.FC = observer(() => {
+  const navigate = useNavigate();
   const rootStore = useContext(RootStoreContext)
   useEffect(() => {
     return () => {
@@ -58,6 +60,11 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
           )
         })}
       </View>
+      <Button title='SAVE' onPress={() => {
+        rootStore.workoutStore.saveHistory()
+        navigate('/')
+      }} />
+
       {(rootStore.workoutTimer.isRunning || null) && <WorkoutTimer
         currentTime={rootStore.workoutTimer.display}
         percent={rootStore.workoutTimer.percent}

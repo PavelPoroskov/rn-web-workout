@@ -6,19 +6,20 @@ import {
   // pausePersisting,
 } from 'mobx-persist-store';
 import type { RootStore } from "./RootStore";
+import dayjs from "dayjs";
 
 type WorkoutDay = 'a' | 'b'
 
-interface WorkoutHistory {
-  [key: string]: Array<{ exercise: string, value: number }>
-}
-
-interface CurrentExercise {
+export interface CurrentExercise {
   weight: number
   reps: number
   numSets: number
   exercise: string
   sets: string[]
+}
+
+interface WorkoutHistory {
+  [key: string]: CurrentExercise[]
 }
 
 export class WorkoutStore {
@@ -59,7 +60,7 @@ export class WorkoutStore {
 
   @observable accessor currentExercise: CurrentExercise[] = []
 
-  @observable accessor history: WorkoutHistory
+  @observable accessor history: WorkoutHistory = {}
 
 
   @action.bound
@@ -69,10 +70,23 @@ export class WorkoutStore {
 
   @action.bound
   addExercises(exerciseList: CurrentExercise[]) {
-    while (this.currentExercise.length > 0) {
-      this.currentExercise.pop()
-    }
+    this.currentExercise  = []
     this.currentExercise.push(...exerciseList)
+  }
+
+  @action.bound
+  saveHistory() {
+    const strDate =  dayjs().format('YYYY-MM-DD')
+    this.history[strDate] = this.currentExercise.map((exercise) => {
+      const {sets, ...rest} = exercise
+
+      return {
+        ...rest,
+        sets: [...sets],
+      }
+    })
+
+    this.currentExercise  = []
   }
 }
 
