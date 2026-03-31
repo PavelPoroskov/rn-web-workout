@@ -23,6 +23,11 @@ buildscript {
                 codegenDir = rootProject.file("../../../node_modules/@react-native/codegen/")
             }
         }
+        repositories {
+          maven {
+            url = uri(project(":react-native-async-storage_async-storage").file("local_repo"))
+          }
+        }
     }
 }
 
