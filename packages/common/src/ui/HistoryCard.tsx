@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 interface HistoryCardProps {
   header: string
   exercises: CurrentExercise[]
+  onPress: () => void
 }
 
 const exerciseShortName = {
@@ -23,10 +24,10 @@ const exerciseShortName = {
   "Barbell Row": "ROW"
 };
 
-export const HistoryCard: React.FC<HistoryCardProps> = ({ header, exercises }) => {
+export const HistoryCard: React.FC<HistoryCardProps> = ({ header, exercises, onPress }) => {
 
   return (
-    <Card>
+    <Card onPress={onPress}>
       <Text>{header}</Text>
       {exercises.map(ex => (
         <Text key={ex.exercise}>{`${exerciseShortName[ex.exercise as keyof typeof exerciseShortName]

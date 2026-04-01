@@ -23,4 +23,4 @@ react-router-dom@4 -> react-router-dom@6 (actual @7)
   use <BrowserRouter>/<NativeRouter>,
     not use new createBrowserRouter(). react-router does not have this for react-native
 mobx-persist -> mobx-persist-store@1.1.8
-  mobx-persist: not updated 9, error in '@persist @observable accessor someProperty'
+  mobx-persist: not updated 9 years, error in '@persist @observable accessor someProperty'

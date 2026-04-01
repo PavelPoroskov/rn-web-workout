@@ -13,6 +13,7 @@ export const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<WorkoutHistoryScreen />} />
         <Route path="/current-workout" element={<CurrentWorkoutScreen />} />
+        <Route path="/workout/:date" element={<CurrentWorkoutScreen />} />
       </Routes>
     </Router>
   )

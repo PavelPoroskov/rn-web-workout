@@ -1,49 +1,44 @@
 import React, { useContext } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Button, FlatList, StyleSheet, View } from 'react-native';
 import { useNavigate } from '../Router';
 import { RootStoreContext } from '../stores/RootStore';
-import type { CurrentExercise } from '../stores/WorkoutStore';
 import { Text } from '../ui/CustomRN';
 import { HistoryCard } from '../ui/HistoryCard';
+import { observer } from 'mobx-react-lite';
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
+  container: {
+    flex: 1,
   },
+  cardContainer: {
+    flex: 1,
+    padding: 10,
+  }
 });
 
-export const WorkoutHistoryScreen: React.FC = () => {
+export const WorkoutHistoryScreen: React.FC = observer(() => {
   const rootStore = useContext(RootStoreContext)
   const navigate = useNavigate();
 
-  const rows: Array<
-    Array<{
-      date: string;
-      workout: CurrentExercise[];
-    }>
-  > = [];
+  const dataList = Object.entries(rootStore.workoutStore.history).map(([date, workout]) => ({ date, workout, type: 1 }))
+  const rest3 = dataList.length % 3
 
-  Object.entries(rootStore.workoutStore.history).forEach(
-    ([date, workout], i) => {
-      if (i % 3 === 0) {
-        rows.push([
-          {
-            date,
-            workout
-          }
-        ]);
-      } else {
-        rows[rows.length - 1].push({
-          date,
-          workout
-        });
-      }
+  if (rest3 !== 0) {
+    let addPlaceholder = 3 - rest3
+
+    while (0 < addPlaceholder) {
+      dataList.push({
+        date: `placeholder${dataList.length + addPlaceholder}`,
+        workout: [],
+        type: 0,
+      })
+      addPlaceholder = addPlaceholder - 1
     }
-  );
-
+  }
+  // console.log('WorkoutHistoryScreen', dataList.length)
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Workout History Screen</Text>
       <Button title='Create Workout' onPress={() => {
         rootStore.workoutStore.addExercises([
@@ -74,14 +69,26 @@ export const WorkoutHistoryScreen: React.FC = () => {
         navigate('/current-workout')
       }} />
 
-      {rows.map((row, rowIndex) => {
-        return (
-          <View key={rowIndex} style={styles.row}>
-            <HistoryCard key={row[0].date} header={row[0].date} exercises={row[0].workout} />
-            {(row[1] || null) && <HistoryCard key={row[1].date} header={row[1].date} exercises={row[1].workout} />}
-          </View>
-        )
-      })}
+      <FlatList
+        data={dataList}
+        renderItem={({ item }) => (
+          <>
+            {item.type===1 && <View key={item.date} style={styles.cardContainer}>
+              <HistoryCard
+              header={item.date}
+              exercises={item.workout}
+              onPress={() => {
+                navigate(`/workout/${item.date}`)
+              }}
+              />
+            </View>
+            }
+            {item.type===0 && <View key={item.date} style={styles.cardContainer} />}
+          </>
+        )}
+        keyExtractor={item => item.date}
+        numColumns={3}
+      />
     </View>
   )
-}
+})

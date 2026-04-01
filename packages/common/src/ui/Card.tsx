@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -17,13 +17,24 @@ const styles = StyleSheet.create({
 
 interface CardProps {
   children: React.ReactNode
+  onPress?: () => void
 }
 
-export const Card: React.FC<CardProps> = ({ children }) => {
+export const Card: React.FC<CardProps> = ({ children, onPress }) => {
 
-  return (
-    <View style={styles.cardContainer}>
-      { children }
-    </View>
-  )
+  // return (
+  //   <View style={styles.cardContainer}>
+  //     { children }
+  //   </View>
+  // )
+
+  if (onPress) {
+    return (
+      <TouchableOpacity style={styles.cardContainer} onPress={onPress}>
+        {children}
+      </TouchableOpacity>
+    );
+  }
+
+  return <View style={styles.cardContainer}>{children}</View>;
 }
