@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   circleText: {
     fontSize: 16,
     // margin: "auto",
+    userSelect: 'none',
   },
   whiteText: {
     color: "#fff"
@@ -49,10 +50,11 @@ interface WorkoutCardProps {
   exercise: string
   repsAndWeight: string
   sets: string[]
+  isEditMode: boolean
   onSetPress: (index: number) => void
 }
 
-export const WorkoutCard: React.FC<WorkoutCardProps> = observer(({ exercise, repsAndWeight, sets, onSetPress }) => {
+export const WorkoutCard: React.FC<WorkoutCardProps> = observer(({ exercise, repsAndWeight, sets, onSetPress, isEditMode }) => {
 
   return (
     <View style={styles.cardContainer}>
@@ -77,29 +79,31 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = observer(({ exercise, rep
               )
             }
 
-            if (set === '') {
+            const btnStyle = set === '' ? [styles.circle, styles.fadedBackground] : styles.circle
+            const textStyle = set === '' ? [styles.circleText, styles.grayText] : [styles.circleText, styles.whiteText]
+            const text = set === '' ? '' : set
+
+            if (isEditMode) {
               return (
                 <TouchableOpacity
                   key={key}
-                  style={[styles.circle, styles.fadedBackground]}
+                  style={btnStyle}
                   onPress={() => onSetPress(index)}
                 >
-                  <Text style={[styles.circleText, styles.grayText]}></Text>
+                  <Text style={textStyle}>{text}</Text>
                 </TouchableOpacity>
               )
+            } else {
+              return (
+                <View
+                  key={key}
+                  style={btnStyle}
+                >
+                  <Text style={textStyle}>{text}</Text>
+                </View>
+              )
             }
-
-            return (
-              <TouchableOpacity
-                key={key}
-                style={styles.circle}
-                onPress={() => onSetPress(index)}
-              >
-                <Text style={[styles.circleText, styles.whiteText]}>{set}</Text>
-              </TouchableOpacity>
-            )
           })}
-
         </View>
       </Card>
     </View>

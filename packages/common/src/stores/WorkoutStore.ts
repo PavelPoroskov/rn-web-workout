@@ -77,6 +77,7 @@ export class WorkoutStore {
   @action.bound
   saveHistory() {
     const strDate =  dayjs().format('YYYY-MM-DD')
+    // const strDate =  '2026-04-01'
     this.history[strDate] = this.currentExercise.map((exercise) => {
       const {sets, ...rest} = exercise
 

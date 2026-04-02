@@ -31,7 +31,11 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
     navigate('/')
   }
 
-  const isCurrentWorkout = !(date && rootStore.workoutStore.history[date]);
+  // const todayDate = dayjs().format('YYYY-MM-DD')
+  // const isCurrentWorkout = !date || date == todayDate;
+  const isCurrentWorkout = !date;
+
+  const isEditMode = isCurrentWorkout
 
   const exerciseList = isCurrentWorkout
     ? rootStore.workoutStore.currentExercise
@@ -49,6 +53,7 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
               exercise={e.exercise}
               repsAndWeight={`${e.numSets}x${e.reps} ${e.weight}`}
               sets={e.sets}
+              isEditMode={isEditMode}
               onSetPress={(setIndex) => {
                 if (isCurrentWorkout) {
                   rootStore.workoutTimer.startTimer()
@@ -73,12 +78,13 @@ export const CurrentWorkoutScreen: React.FC = observer(() => {
             />
           )
         })}
-        <Button title={isCurrentWorkout ? 'SAVE' : 'CLOSE'} onPress={() => {
-          if (isCurrentWorkout) {
-            rootStore.workoutStore.saveHistory()
-          }
+        {(isEditMode || null) && <Button title='SAVE' onPress={() => {
+          rootStore.workoutStore.saveHistory()
           navigate('/')
-        }} />
+        }} />}
+        {(!isEditMode || null) && <Button title='CLOSE' onPress={() => {
+          navigate('/')
+        }} />}
       </ScrollView>
 
       {(rootStore.workoutTimer.isRunning || null) && <WorkoutTimer
