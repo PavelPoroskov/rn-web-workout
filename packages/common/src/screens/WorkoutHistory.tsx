@@ -1,10 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
-import { Button, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { useNavigate } from '../Router';
 import { RootStoreContext } from '../stores/RootStore';
 import { Text } from '../ui/CustomRN';
+import { Fab } from '../ui/Fab';
 import { HistoryCard } from '../ui/HistoryCard';
-import { observer } from 'mobx-react-lite';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +23,7 @@ export const WorkoutHistoryScreen: React.FC = observer(() => {
 
   const dataList = Object.entries(rootStore.workoutStore.history)
     .map(([date, workout]) => ({ date, workout, type: 1 }))
-    .toSorted((a,b) => a.date.localeCompare(b.date))
+    .toSorted((a, b) => a.date.localeCompare(b.date))
   const rest3 = dataList.length % 3
 
   if (rest3 !== 0) {
@@ -42,55 +43,33 @@ export const WorkoutHistoryScreen: React.FC = observer(() => {
   return (
     <View style={styles.container}>
       <Text>Workout History Screen</Text>
-      <Button title='Create Workout' onPress={() => {
-        rootStore.workoutStore.addExercises([
-          {
-            exercise: 'Squat',
-            numSets: 5,
-            reps: 5,
-            sets: ['5', '5', '5', '5', '5'],
-            weight: 260,
-          },
-          {
-            exercise: 'Bench Press',
-            numSets: 5,
-            reps: 5,
-            sets: ['5', '5', '5', '5', '5'],
-            weight: 200,
-          },
-          {
-            exercise: 'Deadlift',
-            numSets: 1,
-            reps: 5,
-            sets: ['5', 'x', 'x', 'x', 'x'],
-            weight: 360,
-          },
-        ])
-
-        // rootStore.routerStore.setScreen('CurrentWorkout')
-        navigate('/current-workout')
-      }} />
 
       <FlatList
         data={dataList}
         renderItem={({ item }) => (
           <>
-            {item.type===1 && <View key={item.date} style={styles.cardContainer}>
+            {item.type === 1 && <View key={item.date} style={styles.cardContainer}>
               <HistoryCard
-              header={item.date}
-              exercises={item.workout}
-              onPress={() => {
-                navigate(`/workout/${item.date}`)
-              }}
+                header={item.date}
+                exercises={item.workout}
+                onPress={() => {
+                  navigate(`/workout/${item.date}`)
+                }}
               />
             </View>
             }
-            {item.type===0 && <View key={item.date} style={styles.cardContainer} />}
+            {item.type === 0 && <View key={item.date} style={styles.cardContainer} />}
           </>
         )}
         keyExtractor={item => item.date}
         numColumns={3}
       />
+      <Fab onPress={() => {
+        rootStore.workoutStore.fillExercises()
+
+        // rootStore.routerStore.setScreen('CurrentWorkout')
+        navigate('/current-workout')
+      }} />
     </View>
   )
 })

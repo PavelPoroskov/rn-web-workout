@@ -1,12 +1,10 @@
+import dayjs from "dayjs";
 import { action, observable } from "mobx";
 import {
   // clearPersistedStore,
   makePersistable,
-  // startPersisting,
-  // pausePersisting,
 } from 'mobx-persist-store';
 import type { RootStore } from "./RootStore";
-import dayjs from "dayjs";
 
 type WorkoutDay = 'a' | 'b'
 
@@ -50,28 +48,97 @@ export class WorkoutStore {
     });
   }
 
-  @observable accessor currentSquat: number
-  @observable accessor currentBenchPress: number
-  @observable accessor currentOverheadPress: number
-  @observable accessor currentDeadLift: number
-  @observable accessor currentBarbellRow: number
+  @observable accessor currentSquat: number = 45
+  @observable accessor currentBenchPress: number = 45
+  @observable accessor currentOverheadPress: number = 45
+  @observable accessor currentDeadLift: number = 65
+  @observable accessor currentBarbellRow: number = 65
 
-  @observable accessor lastWorkoutType: WorkoutDay
+  @observable accessor lastWorkoutType: WorkoutDay = 'a'
 
   @observable accessor currentExercise: CurrentExercise[] = []
 
   @observable accessor history: WorkoutHistory = {}
-
 
   @action.bound
   setReps(exerciseIndex: number, setIndex: number, reps: string) {
     this.currentExercise[exerciseIndex].sets[setIndex] = reps
   }
 
+  // @computed
+  // get hasCurrentWorkout() {
+  //   return this.currentExercise.length > 0
+  // }
+
   @action.bound
-  addExercises(exerciseList: CurrentExercise[]) {
-    this.currentExercise  = []
+  fillExercises() {
+    if (!(this.currentExercise.length === 0)) {
+      return
+    }
+
+    let exerciseList: CurrentExercise[] = []
+    const emptySet = ['', '', '', '', '']
+
+    if (this.lastWorkoutType === 'b') {
+        exerciseList = [
+          {
+            exercise: 'Squat',
+            numSets: 5,
+            reps: 5,
+            sets: [...emptySet],
+            weight: this.currentSquat,
+          },
+          {
+            exercise: 'Bench Press',
+            numSets: 5,
+            reps: 5,
+            sets: [...emptySet],
+            weight: this.currentBenchPress,
+          },
+          {
+            exercise: 'Deadlift',
+            numSets: 1,
+            reps: 5,
+            sets: ['', 'x', 'x', 'x', 'x'],
+            weight: this.currentDeadLift,
+          },
+        ]
+
+        this.currentSquat += 5
+        this.currentBenchPress += 5
+        this.currentDeadLift += 5
+    } else {
+        exerciseList = [
+          {
+            exercise: 'Squat',
+            numSets: 5,
+            reps: 5,
+            sets: [...emptySet],
+            weight: this.currentSquat,
+          },
+          {
+            exercise: 'Overhead Press',
+            numSets: 5,
+            reps: 5,
+            sets: [...emptySet],
+            weight: this.currentBenchPress,
+          },
+          {
+            exercise: 'Barbell Row',
+            numSets: 1,
+            reps: 5,
+            sets: [...emptySet],
+            weight: this.currentDeadLift,
+          },
+        ]
+
+        this.currentSquat += 5
+        this.currentOverheadPress += 5
+        this.currentBarbellRow += 5
+    }
+
     this.currentExercise.push(...exerciseList)
+    this.lastWorkoutType = this.lastWorkoutType === 'a' ? 'b' : 'a'
   }
 
   @action.bound
