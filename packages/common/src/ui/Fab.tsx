@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     position: "absolute",
-    bottom: 10,
-    right: 10,
+    bottom: 20,
+    right: 20,
     borderRadius: '50%',
     boxShadow: '2px 2px 3px rgb(0 0 0 / 30%)',
 

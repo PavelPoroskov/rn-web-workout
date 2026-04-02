@@ -23,7 +23,8 @@ export const WorkoutHistoryScreen: React.FC = observer(() => {
 
   const dataList = Object.entries(rootStore.workoutStore.history)
     .map(([date, workout]) => ({ date, workout, type: 1 }))
-    .toSorted((a, b) => a.date.localeCompare(b.date))
+    .sort((a, b) => a.date.localeCompare(b.date))
+    // .toSorted((a, b) => a.date.localeCompare(b.date))
   const rest3 = dataList.length % 3
 
   if (rest3 !== 0) {
