@@ -1,3 +1,4 @@
+// create React app (web app)
 npm create vite@latest rn-web-workout-vite -- --template react-ts
 npm i react-native react-native-web
 npm i -D vite-plugin-rnw
@@ -12,9 +13,11 @@ npm i -D vite@7
 // TODO vite@7 -> vite@8 WHEN react-native-web IS READY
 
 
+// create React Native app
 npx @react-native-community/cli@latest init WorkoutReactNativeApp --version latest --skip-git-init
 cd WorkoutReactNativeApp
 npm i react@19.2.4
+
 
 lsusb
 echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android-usb.rules
@@ -26,6 +29,7 @@ sudo fedora-third-party enable
 dnf search temurin
 sudo dnf install temurin-17-jdk.x86_64
 // sudo alternatives --config java
+
 
 cd WorkoutReactNativeApp
 npm run start // terminal 1
@@ -58,18 +62,21 @@ npm i @tutorial-workout/common -w @tutorial-workout/app
 cd packages/common
 npm run build
 
-cd packages/web
-npm run dev
+  // cd packages/web
+  // npm run dev
+npm run dev -w @tutorial-workout/web
 // result: see app from common
 
-cd packages/app
-npm run start // terminal 1
-npm run android // terminal 2
+  // cd packages/app
+  // npm run start // terminal 1
+npm run start -w @tutorial-workout/app
+  // npm run android // terminal 2
+npm run android -w @tutorial-workout/app
 // error 'react-native-renderer(19.2.3) must be the same version as react(19.2.4)
 
 cd packages/web
-npm rm react-native
 npm rm react
+npm rm react-native
 npm rm react-dom
 
 cd packages/common
@@ -85,6 +92,7 @@ npm i react-dom@19.2.3
 cd packages/app
 npm run start // terminal 1
 npm run android // terminal 2
+// OK
 
 
 // add decorators
